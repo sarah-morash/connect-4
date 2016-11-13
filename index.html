@@ -8,6 +8,11 @@
 
     <body ng-controller="Connect4Controller">
         <table class="" border="1">
+          <tr ng-repeat="rowArray in gameBoard">
+            <td ng-repeat="piece in rowArray">
+              {{piece.selected}}
+            </td>
+          </tr>
         </table>
     </body>
 </html>
