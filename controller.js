@@ -1,6 +1,12 @@
 var app = angular.module("Connect4", []);
     app.controller("Connect4Controller", ["$scope", function($scope) {
 
+      /* This Function Shall Create A Game 3 X 3
+      ** Game Board Object Which Has As An Attribute
+      ** "Rows". Each Row Is Itself An Array Consisting
+      ** of Game Piece Objects. Each Game Piece Objects
+      ** Has: (selected:boolean, piece: string)
+      */
       function createGameBoard() {
         var gameBoard = {};
         gameBoard.rows = [];
@@ -19,6 +25,12 @@ var app = angular.module("Connect4", []);
         return gameBoard;
       }
 
+      /* This Function Shall Take As Input A Game
+      ** Board Object And Shall Check Each Row To
+      ** Determine If A Winning Row Combination
+      ** Exists, Returning The Corresponding Boolean
+      ** Result
+      */
       function checkRowsForWinner(board){
         for(var i = 0; i < board.rows.length; i++){
           var winner = true;
@@ -31,10 +43,14 @@ var app = angular.module("Connect4", []);
             return true;
           }
         }
-
         return false;
       }
 
+      $scope.gameBoard=createGameBoard();
+
+      /* Handling When The User Attempts To Add
+      ** A New Piece To The Game Board
+      */
       $scope.addPiece = function(piece) {
 
         if (!piece.selected)
@@ -48,6 +64,6 @@ var app = angular.module("Connect4", []);
         }
       }
 
-      $scope.gameBoard=createGameBoard();
-      
+
+
     }]);
