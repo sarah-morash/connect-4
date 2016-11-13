@@ -46,6 +46,29 @@ var app = angular.module("Connect4", []);
         return false;
       }
 
+      /* This Function Shall Take As Input A Game
+      ** Board Object And Shall Check Each Column
+      ** To Determine If A Winning Column Combination
+      ** Exists, Returning The Corresponding Boolean
+      ** Value
+      */
+      function checkColumnsForWInner(board){
+        var columnHeight = board.rows[0].length;
+
+        for (var columnIndex = 0; columnIndex < columnHeight; columnIndex++){
+          winner = true;
+          for (var row = 0; row < board.rows.length; row ++){
+            if (board.rows[row][columnIndex].piece === "_"){
+              winner = false;
+            }
+          }
+          if (winner){
+            return true;
+          }
+        }
+        return false;
+      }
+
       $scope.gameBoard=createGameBoard();
 
       /* Handling When The User Attempts To Add
@@ -60,10 +83,14 @@ var app = angular.module("Connect4", []);
         }
 
         if (checkRowsForWinner($scope.gameBoard)){
-          alert("YOU ARE AWESOME! YOU WON!");
+          alert("YOU HAVE A WINNING ROW COMBINATION");
+          return
         }
+
+        if (checkColumnsForWInner($scope.gameBoard)){
+          alert("YOU HAVE A WINNING COLUMN COMBINTATION");
+          return;
+        }
+
       }
-
-
-
     }]);
