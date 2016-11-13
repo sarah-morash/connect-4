@@ -10,7 +10,7 @@ var app = angular.module("Connect4", []);
           for (var col = 0; col < 7; col++){
             var gamePiece = {
               selected: false,
-              piece: null
+              piece: "_"
             };
             currRow.push(gamePiece);
           }
@@ -19,8 +19,13 @@ var app = angular.module("Connect4", []);
         return gameBoard;
       }
 
-      $scope.addPiece = function() {
-        console.log("Hello");
+      $scope.addPiece = function(piece) {
+
+        if (!piece.selected)
+        {
+          piece.selected=true;
+          piece.piece = "X";
+        }
       }
 
       $scope.gameBoard=createGameBoard();
