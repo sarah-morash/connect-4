@@ -3,13 +3,15 @@
     <head>
         <script src="angular.min.js"></script>
         <script src="controller.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
 
     <body ng-controller="Connect4Controller">
-        <table class="" border="1">
+        <h1 align="center">tic tac toe</h1>
+        <table align="center" class="" border="1">
           <tr ng-repeat="rowArray in gameBoard.rows">
-            <td ng-repeat="piece in rowArray" ng-click="addPiece(piece)">
+            <td valign="center" ng-repeat="piece in rowArray" ng-click="addPiece(piece)">
               {{piece.piece}}
             </td>
           </tr>
