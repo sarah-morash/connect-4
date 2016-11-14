@@ -52,12 +52,12 @@ var app = angular.module("Connect4", []);
       ** Exists, Returning The Corresponding Boolean
       ** Value
       */
-      function checkColumnsForWinner(board){
+      function checkColumnsForWinner(board, turn){
         var columnHeight = board.rows[0].length;
         for (var columnIndex = 0; columnIndex < columnHeight; columnIndex++){
           winner = true;
           for (var row = 0; row < board.rows.length; row ++){
-            if (board.rows[row][columnIndex].piece === "_"){
+            if (board.rows[row][columnIndex].piece === "_" || board.rows[row][columnIndex].piece === (turn === 0 ? "o" : "x")){
               winner = false;
             }
           }
@@ -74,13 +74,13 @@ var app = angular.module("Connect4", []);
       ** Exists, Returning The Corresponding Boolean
       ** Value
       */
-      function checkTopDiagonalForWinner(board){
+      function checkTopDiagonalForWinner(board, turn){
         var columnHeight = board.rows[0].length;
 
         winner = true;
         for (var columnIndex = 0; columnIndex < columnHeight; columnIndex++){
           for (var row = 0; row < board.rows.length; row ++){
-            if (board.rows[columnIndex][columnIndex].piece === "_"){
+            if (board.rows[columnIndex][columnIndex].piece === "_" || board.rows[columnIndex][columnIndex].piece === (turn === 0 ? "o" : "x")){
               winner = false;
             }
           }
@@ -95,18 +95,18 @@ var app = angular.module("Connect4", []);
       ** Board Object And Shall Check Its Two Main
       ** Diagonals For A Winning Combination
       */
-      function checkDiagonalsForWinner(board){
+      function checkDiagonalsForWinner(board, turn){
         var topLeftToBottomRightWinner = true;
         var topRightToBottomLeftWinner = true;
 
         for(var row = 0; row < board.rows.length; row++){
-          if (board.rows[row][row].piece === "_"){
+          if (board.rows[row][row].piece === "_" || board.rows[row][row].piece === (turn === 0 ? "o" : "x")){
             topLeftToBottomRightWinner = false;
           }
         }
 
         for (var row = 0; row < board.rows.length; row++){
-          if (board.rows[row][board.rows.length - 1 - row].piece === "_"){
+          if (board.rows[row][board.rows.length - 1 - row].piece === "_" || board.rows[row][board.rows.length - 1 - row].piece === (turn === 0 ? "o" : "x")){
             topRightToBottomLeftWinner = false;
           }
         }
@@ -114,7 +114,14 @@ var app = angular.module("Connect4", []);
         return topLeftToBottomRightWinner || topRightToBottomLeftWinner;
       }
 
+      function showWinningMessage(turn){
+        turn === 0 ? $scope.message = "P1 Wins!" : "P2 Wins!";
+        console.log($scope.message);
+      }
+
       $scope.gameBoard=createGameBoard();
+      $scope.message = "";
+      $scope.turn = 0;
 
       /* Handling When The User Attempts To Add
       ** A New Piece To The Game Board
@@ -124,22 +131,40 @@ var app = angular.module("Connect4", []);
         if (!piece.selected)
         {
           piece.selected=true;
-          piece.piece = "x";
+
+          if ($scope.turn === 0){
+            piece.piece = "x";
+          }
+          else{
+            piece.piece = "o";
+          }
         }
 
-        if (checkRowsForWinner($scope.gameBoard)){
+        if (checkRowsForWinner($scope.gameBoard, $scope.turn)){
           alert("YOU HAVE A WINNING ROW COMBINATION");
-          return
+          showWinningMessage($scope.turn);
+          return;
         }
 
-        if (checkColumnsForWinner($scope.gameBoard)){
+        if (checkColumnsForWinner($scope.gameBoard, $scope.turn)){
           alert("YOU HAVE A WINNING COLUMN COMBINTATION");
+          showWinningMessage($scope.turn);
           return;
         }
 
-        if (checkDiagonalsForWinner($scope.gameBoard)){
+        if (checkDiagonalsForWinner($scope.gameBoard, $scope.turn)){
           alert("YOU HAVE A WINNING DIAGONAL COMBINATION");
+          showWinningMessage($scope.turn);
           return;
+        }
+
+        console.log($scope.turn);
+
+        if ($scope.turn === 0){
+          $scope.turn = 1;
+        }
+        else{
+          $scope.turn = 0;
         }
       }
     }]);
