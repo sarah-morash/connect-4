@@ -1,13 +1,17 @@
 var app = angular.module("Connect4", []);
-    app.controller("Connect4Controller", ["$scope", function($scope) {
 
-      /* This Function Shall Create A Game 3 X 3
-      ** Game Board Object Which Has As An Attribute
-      ** "Rows". Each Row Is Itself An Array Consisting
-      ** of Game Piece Objects. Each Game Piece Objects
-      ** Has: (selected:boolean, piece: string)
-      */
-      function createGameBoard() {
+  app.directive('gameBoard', function(){
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/board.html',
+      controller: function () {
+
+        /* This Function Shall Create A Game 3 X 3
+        ** Game Board Object Which Has As An Attribute
+        ** "Rows". Each Row Is Itself An Array Consisting
+        ** of Game Piece Objects. Each Game Piece Objects
+        ** Has: (selected:boolean, piece: string)
+        */
         var gameBoard = {};
         gameBoard.rows = [];
 
@@ -22,8 +26,16 @@ var app = angular.module("Connect4", []);
           }
           gameBoard.rows.push(currRow);
         }
-        return gameBoard;
-      }
+        this.gameBoard = gameBoard;
+      },
+      controllerAs: 'boardCtrl'
+    };
+  });
+
+
+    app.controller("Connect4Controller", ["$scope", function($scope) {
+
+
 
       /* This Function Shall Take As Input A Game
       ** Board Object And Shall Check Each Row To

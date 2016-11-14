@@ -7,15 +7,7 @@
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
 
-    <body ng-controller="Connect4Controller">
-        <h1 align="center">tic tac toe</h1>
-        <table align="center" class="" border="1">
-          <tr ng-repeat="rowArray in gameBoard.rows">
-            <td valign="center" ng-repeat="piece in rowArray" ng-click="addPiece(piece)">
-              {{piece.piece}}
-            </td>
-          </tr>
-        </table>
-        <h2>{{$scope.message}}</h2>
+    <body>
+      <game-board></game-board>
     </body>
 </html>

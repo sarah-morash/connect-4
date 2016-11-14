@@ -1,0 +1,8 @@
+<h1 align="center">tic tac toe</h1>
+<table align="center" class="" border="1">
+  <tr ng-repeat="rowArray in boardCtrl.gameBoard.rows">
+    <td valign="center" ng-repeat="piece in rowArray">
+      {{piece.piece}}
+    </td>
+  </tr>
+</table>
