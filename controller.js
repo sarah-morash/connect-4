@@ -54,7 +54,6 @@ var app = angular.module("Connect4", []);
       */
       function checkColumnsForWinner(board){
         var columnHeight = board.rows[0].length;
-
         for (var columnIndex = 0; columnIndex < columnHeight; columnIndex++){
           winner = true;
           for (var row = 0; row < board.rows.length; row ++){
@@ -93,27 +92,26 @@ var app = angular.module("Connect4", []);
       }
 
       /* This Function Shall Take As Input A Game
-      ** Board Object And Check The Diagonal Line From Bottom Left Corner To Top Right Corner
-      ** To Determine If A Winning Combination
-      ** Exists, Returning The Corresponding Boolean
-      ** Value
+      ** Board Object And Shall Check Its Two Main
+      ** Diagonals For A Winning Combination
       */
-      function checkBottomDiagonalForWinner(board){
-        var columnHeight = board.rows[0].length;
-        var boardLength = 3;
+      function checkDiagonalsForWinner(board){
+        var topLeftToBottomRightWinner = true;
+        var topRightToBottomLeftWinner = true;
 
-        winner = true;
-        for (var columnIndex = 0; columnIndex < columnHeight; columnIndex++){
-          for (var row = 0; row < boardLength; row ++){
-            if (board.rows[columnIndex][(boardLength - 1) - columnIndex].piece === "_"){
-              winner = false;
-            }
+        for(var row = 0; row < board.rows.length; row++){
+          if (board.rows[row][row].piece === "_"){
+            topLeftToBottomRightWinner = false;
           }
         }
-        if (winner){
-          return true;
+
+        for (var row = 0; row < board.rows.length; row++){
+          if (board.rows[row][board.rows.length - 1 - row].piece === "_"){
+            topRightToBottomLeftWinner = false;
+          }
         }
-        return false;
+
+        return topLeftToBottomRightWinner || topRightToBottomLeftWinner;
       }
 
       $scope.gameBoard=createGameBoard();
@@ -139,15 +137,9 @@ var app = angular.module("Connect4", []);
           return;
         }
 
-        if (checkBottomDiagonalForWinner($scope.gameBoard)){
-          alert("YOU HAVE A WINNING BOTTOM DIAGONAL COMBINTATION");
+        if (checkDiagonalsForWinner($scope.gameBoard)){
+          alert("YOU HAVE A WINNING DIAGONAL COMBINATION");
           return;
         }
-
-        if (checkTopDiagonalForWinner($scope.gameBoard)){
-          alert("YOU HAVE A WINNING TOP DIAGONAL COMBINTATION");
-          return;
-        }
-
       }
     }]);
