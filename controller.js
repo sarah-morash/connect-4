@@ -52,9 +52,8 @@ var app = angular.module("Connect4", []);
       ** Exists, Returning The Corresponding Boolean
       ** Value
       */
-      function checkColumnsForWInner(board){
+      function checkColumnsForWinner(board){
         var columnHeight = board.rows[0].length;
-
         for (var columnIndex = 0; columnIndex < columnHeight; columnIndex++){
           winner = true;
           for (var row = 0; row < board.rows.length; row ++){
@@ -67,6 +66,29 @@ var app = angular.module("Connect4", []);
           }
         }
         return false;
+      }
+
+      /* This Function Shall Take As Input A Game
+      ** Board Object And Shall Check Its Two Main
+      ** Diagonals For A Winning Combination
+      */
+      function checkDiagonalsForWinner(board){
+        var topLeftToBottomRightWinner = true;
+        var topRightToBottomLeftWinner = true;
+
+        for(var row = 0; row < board.rows.length; row++){
+          if (board.rows[row][row].piece === "_"){
+            topLeftToBottomRightWinner = false;
+          }
+        }
+
+        for (var row = 0; row < board.rows.length; row++){
+          if (board.rows[row][board.rows.length - 1 - row].piece === "_"){
+            topRightToBottomLeftWinner = false;
+          }
+        }
+
+        return topLeftToBottomRightWinner || topRightToBottomLeftWinner;
       }
 
       $scope.gameBoard=createGameBoard();
@@ -87,10 +109,14 @@ var app = angular.module("Connect4", []);
           return
         }
 
-        if (checkColumnsForWInner($scope.gameBoard)){
+        if (checkColumnsForWinner($scope.gameBoard)){
           alert("YOU HAVE A WINNING COLUMN COMBINTATION");
           return;
         }
 
+        if (checkDiagonalsForWinner($scope.gameBoard)){
+          alert("YOU HAVE A WINNING DIAGONAL COMBINATION");
+          return;
+        }
       }
     }]);
