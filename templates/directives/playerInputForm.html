@@ -4,7 +4,7 @@
 
       <h1 align="center">Tic Tac Toe</h1>
 
-      <form>
+      <form ng-submit="setNames()" ng-show="namesNeeded">
 
         <div class="form-group">
 
@@ -20,7 +20,7 @@
 
         </div>
 
-        <btn class="btn btn-success"> Play! </btn>
+        <button type="submit" class="btn btn-success"> Play! </button>
 
       </form>
 
