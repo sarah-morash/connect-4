@@ -21,3 +21,22 @@ td {
 h2 {
     color: #000;
 }
+
+h3.typing
+{
+    text-align: center;
+    color: #000;
+    width: 30em;
+    white-space:nowrap;
+    overflow:hidden;
+    -webkit-animation: type 5s steps(50, end);
+    animation: type 5s steps(50, end);
+}
+
+@keyframes type{
+    from { width: 0; }
+}
+
+@-webkit-keyframes type{
+    from { width: 0; }
+}

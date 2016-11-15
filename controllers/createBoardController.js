@@ -9,6 +9,8 @@ angular.module("Connect4").controller('createBoardController', function($scope){
   function generateGameBoard(){
     var gameBoard = {};
     gameBoard.rows = [];
+    gameBoard.p1Wins = false;
+    gameBoard.p2Wins = false;
 
     for(var row = 0; row < 3; row++){
       var currRow = [];
@@ -24,6 +26,8 @@ angular.module("Connect4").controller('createBoardController', function($scope){
     return gameBoard;
   }
   $scope.gameBoard = generateGameBoard();
+  //$scope.p1Wins = false;
+  //$scope.p2Wins = false;
 
   /* This Function Shall Take As Input A Game
   ** Board Object And Shall Check Each Row To
@@ -91,6 +95,7 @@ angular.module("Connect4").controller('createBoardController', function($scope){
 
   $scope.checkBoardForWinner = function(){
     var isWinner = checkRowsForWinner($scope.gameBoard) || checkColumnsForWinner($scope.gameBoard) || checkDiagonalsForWinner($scope.gameBoard);
+    $scope.gameBoard.p1Wins = true; //TODO: Make css more robust to center this initially, just trying it out for now :)
 
     if (isWinner){
       alert("We Have A Winner");
