@@ -2,8 +2,6 @@
 <html ng-app="Connect4">
     <head>
         <script src="angular.min.js"></script>
-        <script src="controller.js"></script>
-        <script src="check-for-winners.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
@@ -11,4 +9,14 @@
     <body>
       <game-board></game-board>
     </body>
+
+
+    <!-- Main Module -->
+    <script src="app.js"></script>
+    
+    <!-- Controllers -->
+    <script src="controllers/createBoardController.js"></script>
+
+    <!-- Directives -->
+    <script src="directives/game-board.js"></script>
 </html>
