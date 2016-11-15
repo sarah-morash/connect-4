@@ -1,4 +1,10 @@
-angular.module("Connect4").controller('boardController', ['$scope', 'SquareBoard','CheckForWinner', function($scope, SquareBoard, CheckForWinner){
+angular.module("Connect4").controller('boardController', ['$scope', 'SquareBoard','CheckForWinner', 'AddPiece', function($scope, SquareBoard, CheckForWinner, AddPiece){
+
   $scope.gameBoard = SquareBoard.board(3);
-  $scope.isWinner = CheckForWinner.checkBoardForWinner($scope.gameBoard);
+
+  $scope.addPiece = function(piece){
+    AddPiece.addPieceToBoard(piece);
+    $scope.isWinner = CheckForWinner.checkBoardForWinner($scope.gameBoard);
+  }
+
 }]);

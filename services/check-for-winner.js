@@ -62,6 +62,8 @@ angular.module('Connect4').factory('CheckForWinner', function CheckForWinnerFact
          topRightToBottomLeftWinner = false;
        }
      }
+
+     return topLeftToBottomRightWinner || topRightToBottomLeftWinner;
    }
 
   return {
