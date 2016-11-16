@@ -7,7 +7,7 @@ body {
 table {
     border: 1px;
     border-color: #aba;
-    color: #fff;  
+    color: #fff;
 }
 
 td {
@@ -39,4 +39,9 @@ h3.typing
 
 @-webkit-keyframes type{
     from { width: 0; }
+}
+
+h3.active{
+  font-weight:bold;
+  color:#5bc0de;
 }
