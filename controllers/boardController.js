@@ -22,4 +22,8 @@ angular.module("Connect4").controller('boardController', ['$scope', 'SquareBoard
     $scope.turnCounter++;
   };
 
+  $scope.reset = function() {
+    $scope.gameBoard = SquareBoard.board(3);
+    $scope.setNames();
+  }
 }]);

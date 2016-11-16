@@ -18,6 +18,8 @@ angular.module('Connect4').controller('playerInputController', function($scope){
   };
 
   $scope.setNames = function(){
+    $scope.player1.isWinner = false;
+    $scope.player2.isWinner = false;
     $scope.namesNeeded = false;
     $scope.turnCounter = 0;
     $scope.player1.isTurn = true;
