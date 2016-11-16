@@ -17,6 +17,7 @@ angular.module('Connect4').controller('playerInputController', function($scope){
 
   $scope.setNames = function(){
     $scope.namesNeeded = false;
+    $scope.turnCounter = 0;
     $scope.player1.isTurn = true;
   }
 
