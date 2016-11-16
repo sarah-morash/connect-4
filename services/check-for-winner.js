@@ -6,11 +6,11 @@ angular.module('Connect4').factory('CheckForWinner', function CheckForWinnerFact
    ** Exists, Returning The Corresponding Boolean
    ** Result
    */
-   function checkRowsForWinner(board){
+   function checkRowsForWinner(board,value,oppositeValue){
      for(var i = 0; i < board.rows.length; i++){
        var winner = true;
        for(var j = 0; j < board.rows[i].length; j++){
-         if (board.rows[i][j].piece === "_"){
+         if (board.rows[i][j].piece === oppositeValue || board.rows[i][j].piece === "_"){
            winner=false;
          }
        }
@@ -27,12 +27,12 @@ angular.module('Connect4').factory('CheckForWinner', function CheckForWinnerFact
    ** Exists, Returning The Corresponding Boolean
    ** Value
    */
-   function checkColumnsForWinner(board){
+   function checkColumnsForWinner(board,value,oppositeValue){
      var columnHeight = board.rows[0].length;
      for (var columnIndex = 0; columnIndex < columnHeight; columnIndex++){
        winner = true;
        for (var row = 0; row < board.rows.length; row ++){
-         if (board.rows[row][columnIndex].piece === "_"){
+         if (board.rows[row][columnIndex].piece === oppositeValue || board.rows[row][columnIndex].piece === "_" ){
            winner = false;
          }
        }
@@ -47,18 +47,18 @@ angular.module('Connect4').factory('CheckForWinner', function CheckForWinnerFact
    ** Board Object And Shall Check Its Two Main
    ** Diagonals For A Winning Combination
    */
-   function checkDiagonalsForWinner(board){
+   function checkDiagonalsForWinner(board,value,oppositeValue){
      var topLeftToBottomRightWinner = true;
      var topRightToBottomLeftWinner = true;
 
      for(var row = 0; row < board.rows.length; row++){
-       if (board.rows[row][row].piece === "_"){
+       if (board.rows[row][row].piece === oppositeValue || board.rows[row][row].piece === "_"){
          topLeftToBottomRightWinner = false;
        }
      }
 
      for (var row = 0; row < board.rows.length; row++){
-       if (board.rows[row][board.rows.length - 1 - row].piece === "_"){
+       if (board.rows[row][board.rows.length - 1 - row].piece === oppositeValue || board.rows[row][board.rows.length - 1 - row].piece === "_"){
          topRightToBottomLeftWinner = false;
        }
      }
@@ -67,8 +67,8 @@ angular.module('Connect4').factory('CheckForWinner', function CheckForWinnerFact
    }
 
   return {
-    checkBoardForWinner: function(board){
-      return checkRowsForWinner(board) || checkColumnsForWinner(board) || checkDiagonalsForWinner(board);
+    checkBoardForWinner: function(board,value,oppositeValue){
+      return checkRowsForWinner(board,value,oppositeValue) || checkColumnsForWinner(board,value,oppositeValue) || checkDiagonalsForWinner(board,value,oppositeValue);
     }
   };
 })
