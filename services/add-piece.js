@@ -1,8 +1,8 @@
 angular.module('Connect4').factory('AddPiece', function AddPieceFactory(){
   return {
-    addPieceToBoard: function(piece){
+    addPieceToBoard: function(piece,value){
       if (piece.piece !== null){
-        piece.piece = 'X';
+        piece.piece = value;
       }
     }
   };
