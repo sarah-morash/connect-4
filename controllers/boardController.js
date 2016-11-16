@@ -6,7 +6,7 @@ angular.module("Connect4").controller('boardController', ['$scope', 'SquareBoard
 
     if ($scope.turnCounter % 2 === 0 ){
       AddPiece.addPieceToBoard(piece,"X");
-      $scope.isWinner = CheckForWinner.checkBoardForWinner($scope.gameBoard,"X","O");
+      $scope.player1.isWinner = CheckForWinner.checkBoardForWinner($scope.gameBoard,"X","O");
       $scope.player1.isTurn = false;
       $scope.player2.isTurn = true;
 
@@ -14,7 +14,7 @@ angular.module("Connect4").controller('boardController', ['$scope', 'SquareBoard
 
     else {
       AddPiece.addPieceToBoard(piece,"O");
-      $scope.isWinner = CheckForWinner.checkBoardForWinner($scope.gameBoard,"O","X");
+      $scope.player2.isWinner = CheckForWinner.checkBoardForWinner($scope.gameBoard,"O","X");
       $scope.player1.isTurn = true;
       $scope.player2.isTurn = false;
     }

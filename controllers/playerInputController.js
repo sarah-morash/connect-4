@@ -6,13 +6,15 @@ angular.module('Connect4').controller('playerInputController', function($scope){
   $scope.player1 = {
     name: "",
     piece: "X",
-    isTurn: false
+    isTurn: false,
+    isWinner: false
   };
 
   $scope.player2 = {
     name: "",
     piece: "O",
-    isTurn: false
+    isTurn: false,
+    isWinner: false
   };
 
   $scope.setNames = function(){
