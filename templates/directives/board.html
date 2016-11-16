@@ -3,7 +3,7 @@
 
       <h3 ng-show="isWinner"> We Have A Winner! </h3>
 
-      <div class="col-xs-4 col-xs-offset-4">
+      <div class="col-xs-4 col-xs-offset-4" ng-hide="namesNeeded">
 
         <table align="center" class="table" border="1">
           <tr ng-repeat="rowArray in gameBoard.rows">
