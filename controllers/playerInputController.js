@@ -23,6 +23,7 @@ angular.module('Connect4').controller('playerInputController', function($scope){
     $scope.namesNeeded = false;
     $scope.turnCounter = 0;
     $scope.player1.isTurn = true;
+    $scope.player2.isTurn = false;
   }
 
 });
